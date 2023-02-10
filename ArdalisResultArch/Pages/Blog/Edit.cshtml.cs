@@ -64,6 +64,7 @@ namespace ArdalisResultArch.Pages.Blog
                 return this.Page();
             }
 
+            // This wont work because FluentValidation's List<ValidationFailure> do not contain the full complex property path...
             if (updateResult.ValidationErrors.Any())
             {
                 foreach (var error in updateResult.ValidationErrors)
