@@ -1,0 +1,43 @@
+﻿@page
+@model ArdalisResultArch.Pages.Blog.EditModel
+@{
+}
+
+<h2>Edit Blog</h2>
+<hr />
+
+<div asp-validation-summary="All" class="text-danger"></div>
+
+<div class="row">
+    <div class="col-4">
+        <form method="post">
+
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">MyProperty</label>
+                <input type="text" class="form-control" asp-for="MyProperty" />
+                <span asp-validation-for="MyProperty"></span>
+            </div>
+
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Name</label>
+                <input type="text" class="form-control" asp-for="EditBlogViewModel.Name" />
+                <span asp-validation-for="EditBlogViewModel.Name"></span>
+            </div>
+
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Category Id</label>
+                <input type="text" class="form-control" asp-for="EditBlogViewModel.CategoryId" />
+                <span asp-validation-for="EditBlogViewModel.Name"></span>
+            </div>
+
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Tags (comma sep.)</label>
+                <input type="text" class="form-control" asp-for="EditBlogViewModel.Tags" />
+                <span asp-validation-for="EditBlogViewModel.Name"></span>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+</div>
+

@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ArdalisResultArch.Application\ArdalisResultArch.Application.csproj" />
+    <ProjectReference Include="..\ArdalisResultArch.Data\ArdalisResultArch.Data.csproj" />
+    <ProjectReference Include="..\ArdalisResultArch.Domain\ArdalisResultArch.Domain.csproj" />
+  </ItemGroup>
+
+</Project>
