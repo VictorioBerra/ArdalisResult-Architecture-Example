@@ -8,6 +8,13 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace ArdalisResultArch.Pages.Blog
 {
+    // DEBUG
+    public class MyComplexViewModel
+    {
+        [System.ComponentModel.DataAnnotations.Required]
+        public string MyProperty { get; set; }
+    }
+
     public class EditModel : PageModel
     {
         private readonly BlogService blogService;
@@ -17,9 +24,10 @@ namespace ArdalisResultArch.Pages.Blog
             this.blogService = blogService;
         }
 
+        // DEBUG
         [BindProperty]
         [System.ComponentModel.DataAnnotations.Required]
-        public string MyProperty { get; set; }
+        public MyComplexViewModel MyComplexViewModel { get; set; }
 
         [BindProperty]
         public EditBlogViewModel EditBlogViewModel { get; set; }
