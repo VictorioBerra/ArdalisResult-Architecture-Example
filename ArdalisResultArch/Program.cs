@@ -1,10 +1,14 @@
 using ArdalisResultArch.Data.Extensions;
 using ArdalisResultArch.Application.Extensions;
+using ArdalisResultArch.Validators;
+using FluentValidation;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+
+builder.Services.AddValidatorsFromAssemblyContaining<BlogEditModelValidator>();
 
 builder.Services.AddApplicationServiceLayer();
 builder.Services.AddApplicationDataLayer();

@@ -11,4 +11,8 @@
     <ProjectReference Include="..\ArdalisResultArch.Domain\ArdalisResultArch.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.4.0" />
+  </ItemGroup>
+
 </Project>

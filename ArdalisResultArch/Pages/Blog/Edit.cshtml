@@ -6,17 +6,11 @@
 <h2>Edit Blog</h2>
 <hr />
 
-<div asp-validation-summary="All" class="text-danger"></div>
-
 <div class="row">
     <div class="col-4">
         <form method="post">
 
-            <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">MyComplexViewModel MyProperty</label>
-                <input type="text" class="form-control" asp-for="MyComplexViewModel.MyProperty" />
-                <span asp-validation-for="MyComplexViewModel.MyProperty"></span>
-            </div>
+            <div asp-validation-summary="All" class="text-danger"></div>
 
             <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">Name</label>
@@ -27,13 +21,13 @@
             <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">Category Id</label>
                 <input type="text" class="form-control" asp-for="EditBlogViewModel.CategoryId" />
-                <span asp-validation-for="EditBlogViewModel.Name"></span>
+                <span asp-validation-for="EditBlogViewModel.CategoryId"></span>
             </div>
 
             <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">Tags (comma sep.)</label>
                 <input type="text" class="form-control" asp-for="EditBlogViewModel.Tags" />
-                <span asp-validation-for="EditBlogViewModel.Name"></span>
+                <span asp-validation-for="EditBlogViewModel.Tags"></span>
             </div>
 
             <button type="submit" class="btn btn-primary">Submit</button>

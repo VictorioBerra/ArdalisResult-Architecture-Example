@@ -1,5 +1,5 @@
 using Ardalis.Result;
-using Ardalis.Result.AspNetCore;
+using FluentValidation;
 using ArdalisResultArch.Application;
 using ArdalisResultArch.Domain.Models;
 using ArdalisResultArch.ViewModels;
@@ -8,26 +8,18 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace ArdalisResultArch.Pages.Blog
 {
-    // DEBUG
-    public class MyComplexViewModel
-    {
-        [System.ComponentModel.DataAnnotations.Required]
-        public string MyProperty { get; set; }
-    }
-
     public class EditModel : PageModel
     {
         private readonly BlogService blogService;
+        private readonly IValidator<EditModel> editModelValidator;
 
-        public EditModel(BlogService blogService)
+        public EditModel(
+            IValidator<EditModel> editModelValidator,
+            BlogService blogService)
         {
             this.blogService = blogService;
+            this.editModelValidator = editModelValidator;
         }
-
-        // DEBUG
-        [BindProperty]
-        [System.ComponentModel.DataAnnotations.Required]
-        public MyComplexViewModel MyComplexViewModel { get; set; }
 
         [BindProperty]
         public EditBlogViewModel EditBlogViewModel { get; set; }
@@ -56,24 +48,20 @@ namespace ArdalisResultArch.Pages.Blog
                 Tags = this.EditBlogViewModel.Tags,
             };
 
-            var updateResult = await this.blogService.EditBlogAsync(editBlogRequest);
+            var result = this.editModelValidator.Validate(this);
 
-            // DEBUG
-            if (!this.ModelState.IsValid)
+            if (result.Errors.Any())
             {
-                return this.Page();
-            }
-
-            // This wont work because FluentValidation's List<ValidationFailure> do not contain the full complex property path...
-            if (updateResult.ValidationErrors.Any())
-            {
-                foreach (var error in updateResult.ValidationErrors)
+                // TODO move to extensions class
+                foreach (var error in result.Errors)
                 {
-                    this.ModelState.AddModelError(error.Identifier, error.ErrorMessage);
+                    this.ModelState.AddModelError(error.PropertyName, error.ErrorMessage);
                 }
 
                 return this.Page();
             }
+
+            var updateResult = await this.blogService.EditBlogAsync(editBlogRequest);
 
             if (updateResult.Status == ResultStatus.NotFound)
             {
@@ -85,6 +73,8 @@ namespace ArdalisResultArch.Pages.Blog
             }
             else
             {
+                // IValidator for this page model would have returned friendly errors to the user
+                // If the App Service returned Validation errors, its out of sync with the page model validator
                 throw new NotImplementedException(
                     $"Unexpected result status from {nameof(this.blogService)}.{nameof(this.blogService.EditBlogAsync)}(...)");
             }
